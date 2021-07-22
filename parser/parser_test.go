@@ -46,9 +46,6 @@ func TestParseTop(t *testing.T) {
 						t.Fatalf("Expected Error: %s \tGot: %s", expectedVal.Err, numError.Err)
 					} // else the error matched, so return
 				}
-				if _, ok := err.(error); !ok {
-					t.Errorf("Failed to catch error")
-				}
 			}
 			// else we are expecting that no error has occured
 		} else {
@@ -91,9 +88,6 @@ func TestParseSkip(t *testing.T) {
 					if numError.Err != expectedVal.Err {
 						t.Fatalf("Expected Error: %s \tGot: %s", expectedVal.Err, numError.Err)
 					} // else the error matched, so return
-				}
-				if _, ok := err.(error); !ok {
-					t.Errorf("Failed to catch error")
 				}
 			}
 			// else we are expecting that no error has occured

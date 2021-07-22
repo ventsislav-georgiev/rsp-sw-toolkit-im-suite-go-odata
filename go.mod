@@ -1,9 +1,5 @@
 module github.com/intel/rsp-sw-toolkit-im-suite-go-odata
 
-go 1.12
+go 1.16
 
-require (
-	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
-	github.com/lib/pq v1.2.0
-	github.com/pkg/errors v0.8.1
-)
+require github.com/pkg/errors v0.8.1

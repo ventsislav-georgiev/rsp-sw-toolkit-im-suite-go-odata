@@ -95,7 +95,7 @@ func convertValue(token []byte, tokenType int) (interface{}, error) {
 	case filterTokenBoolean:
 		return strconv.ParseBool(string(token))
 	case filterTokenFloat:
-		return strconv.ParseFloat(string(token), 10)
+		return strconv.ParseFloat(string(token), 32)
 	case filterTokenLiteral, filterTokenString:
 		return strings.TrimSpace(string(token)), nil
 	case filterTokenDateTime, filterTokenDate, filterTokenTime:
@@ -183,7 +183,7 @@ func (p *Parser) infixToPostfix(tokens []*Token) (*tokenQueue, error) {
 			}
 			// there was an error parsing
 			if stack.empty() {
-				return nil, errors.New("Parse error")
+				return nil, errors.New("parse error")
 			}
 			wasLiteral = false
 		} else if o1, ok := p.Operators[token.stringValue]; ok {
@@ -282,7 +282,7 @@ func (p *Parser) postfixToTree(queue *tokenQueue) (*ParseNode, error) {
 			}
 
 			if !checkChildType(node.Children) {
-				return nil, errors.New("Cannot have literal and function/operator mismatch")
+				return nil, errors.New("cannot have literal and function/operator mismatch")
 			}
 			stack.push(node)
 		} else if _, ok := p.Operators[stack.peek().Token.stringValue]; ok {
@@ -303,7 +303,7 @@ func (p *Parser) postfixToTree(queue *tokenQueue) (*ParseNode, error) {
 				node.Children = append([]*ParseNode{childNode}, node.Children...)
 			}
 			if !checkChildType(node.Children) {
-				return nil, errors.New("Cannot have literal and function/operator mismatch")
+				return nil, errors.New("cannot have literal and function/operator mismatch")
 			}
 			stack.push(node)
 		}
@@ -438,7 +438,7 @@ func (s *nodeStack) push(n *ParseNode) {
 func (s *nodeStack) pop() (*ParseNode, error) {
 	node := s.Head
 	if node == nil {
-		return nil, errors.New("Child node not available")
+		return nil, errors.New("child node not available")
 	}
 	s.Head = node.Prev
 	return node.ParseNode, nil

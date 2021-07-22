@@ -32,7 +32,7 @@ var globalFilterParser = filterParser()
 
 // ParseFilterString Converts an input string from the $filter part of the URL into a parse
 // tree that can be used by providers to create a response.
-func parseFilterString(filter string) (*ParseNode, error) {
+func ParseFilterString(filter string) (*ParseNode, error) {
 	tokens, err := globalFilterTokenizer.tokenize(filter)
 	if err != nil {
 		return nil, err

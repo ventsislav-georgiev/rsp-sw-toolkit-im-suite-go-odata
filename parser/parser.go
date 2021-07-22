@@ -52,22 +52,22 @@ func ParseURLValues(query url.Values) (map[string]interface{}, error) {
 
 		switch queryParam {
 		case Select:
-			parseResult, err = parseStringArray(&value)
+			parseResult, err = ParseStringArray(&value)
 		case Top:
-			parseResult, err = parseInt(&value)
+			parseResult, err = ParseInt(&value)
 		case Skip:
-			parseResult, err = parseInt(&value)
+			parseResult, err = ParseInt(&value)
 		case Count:
 			parseResult = true
 		case OrderBy:
-			parseResult, err = parseOrderArray(&value)
+			parseResult, err = ParseOrderArray(&value)
 		case InlineCount:
 			if !isValidInlineCountValue(value) {
 				parseErrors = append(parseErrors, "Inline count value needs to be allpages or none")
 			}
 			parseResult = value
 		case Filter:
-			parseResult, err = parseFilterString(value)
+			parseResult, err = ParseFilterString(value)
 		default:
 			parseErrors = append(parseErrors, "Keyword '"+queryParam+"' is not valid")
 		}

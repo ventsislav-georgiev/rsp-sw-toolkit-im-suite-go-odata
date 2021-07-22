@@ -19,7 +19,7 @@ type OrderItem struct {
 	Order string
 }
 
-func parseStringArray(value *string) ([]string, error) {
+func ParseStringArray(value *string) ([]string, error) {
 	result := strings.Split(*value, ",")
 
 	// trim out space
@@ -34,8 +34,8 @@ func parseStringArray(value *string) ([]string, error) {
 	return result, nil
 }
 
-func parseOrderArray(value *string) ([]OrderItem, error) {
-	parsedArray, err := parseStringArray(value)
+func ParseOrderArray(value *string) ([]OrderItem, error) {
+	parsedArray, err := ParseStringArray(value)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func parseOrderArray(value *string) ([]OrderItem, error) {
 	valid := validatefield.New("~!@#$%^&*()_+-")
 	for _, val := range parsedArray {
 		if valid.ValidateField(val) || val == "" {
-			return nil, errors.New("Cannot support field " + val)
+			return nil, errors.New("cannot support field " + val)
 		}
 	}
 
@@ -56,13 +56,13 @@ func parseOrderArray(value *string) ([]OrderItem, error) {
 		s := strings.Split(compressedSpaces, " ")
 
 		if len(s) > 2 {
-			return nil, errors.New("Cannot have more than 2 items in orderby query")
+			return nil, errors.New("cannot have more than 2 items in orderby query")
 		}
 
 		if len(s) > 1 {
 			if s[1] != "asc" &&
 				s[1] != "desc" {
-				return nil, errors.New("Second value in orderby needs to be asc or desc")
+				return nil, errors.New("second value in orderby needs to be asc or desc")
 			}
 			result[i] = OrderItem{s[0], s[1]}
 			continue

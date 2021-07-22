@@ -1,7 +1,3 @@
-# go-odata
-
-A golang package to create ODATA REST APIs for MongoDB and PostgreSQL (jsonb)
-
 ## commands and Examples
 
 - Select: selects specified columns for the data records. This uses a string split with a comma delimiter.
